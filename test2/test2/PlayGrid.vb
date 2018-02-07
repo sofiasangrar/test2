@@ -39,16 +39,16 @@
 
         form.Controls.Add(Me)
 
-        If StartScreen.loadGame = True Then
+        If PlayScreen.loadGame = True Then
             PopulateBoard()
         End If
     End Sub
 
     Private Sub PopulateBoard()
-        For outer = 0 To StartScreen.loadBoardSize
-            For inner = 0 To StartScreen.loadBoardSize
-                If StartScreen.BoardData(outer, inner) <> -1 Then
-                    cells(outer, inner).cellProperty = PlayScreen.colourList(StartScreen.BoardData(outer, inner))
+        For outer = 0 To PlayScreen.loadBoardSize
+            For inner = 0 To PlayScreen.loadBoardSize
+                If PlayScreen.BoardData(outer, inner) <> -1 Then
+                    cells(outer, inner).cellProperty = PlayScreen.colourList(PlayScreen.BoardData(outer, inner))
                     cells(outer, inner).onScreen.BackColor = cells(outer, inner).cellProperty
                 End If
             Next

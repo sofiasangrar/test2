@@ -15,5 +15,21 @@
 
     Private Sub HighScoreTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WindowState = FormWindowState.Maximized
+        Dim readarray() As String
+        Dim filename As String = "C:\Users\12h169\source\repos\test2\highScore.txt"
+        Dim file As New IO.StreamReader(filename)
+
+        Dim scoresArray() As PlayScreen.highScore
+
+        readarray = file.ReadToEnd.Split(",")
+        file.Close()
+        Dim upperBound As Integer = UBound(readarray) - 1
+        ReDim scoresArray(upperBound)
+
+        For i = 0 To upperBound
+            scoresArray(i).score = Val(Strings.Left(readarray(i), 3))
+            scoresArray(i).name = Strings.Right(readarray(i), readarray(i).Length - 3)
+        Next
+        populateGrid(scoresArray)
     End Sub
 End Class

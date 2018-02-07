@@ -15,16 +15,16 @@
         Dim file As IO.StreamWriter
         Dim filename As String = "C:\Users\12h169\source\repos\test2\savefile.txt"
         file = My.Computer.FileSystem.OpenTextFileWriter(filename, False)
-        file.WriteLine(BoardSize.boardDimensions.ToString)
-        file.WriteLine(BoardSize.cellSize.ToString)
+        file.WriteLine(PlayScreen.dimensions.ToString)
+        file.WriteLine(PlayScreen.cellSize.ToString)
         For counter = 0 To 3
             file.WriteLine(PlayScreen.playerScore(counter).score.ToString)
         Next
         For counter = 0 To 3
             file.WriteLine(PlayScreen.opponentScore(counter).score.ToString)
         Next
-        For outer = 0 To BoardSize.boardDimensions
-            For inner = 0 To BoardSize.boardDimensions
+        For outer = 0 To PlayScreen.dimensions
+            For inner = 0 To PlayScreen.dimensions
                 file.WriteLine(Array.IndexOf(PlayScreen.colourList, PlayScreen.playgrid.cells(outer, inner).cellProperty).ToString)
             Next
         Next

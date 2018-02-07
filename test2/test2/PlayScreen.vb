@@ -6,6 +6,14 @@
     Public dimensions As Integer
     Public userTurn As Boolean = True
 
+
+    Public loadGame As Boolean
+    Public loadBoardSize As Integer
+    Public loadCellSize As Integer
+    Public loadComputerScore(3) As Integer
+    Public loadUserScore(3) As Integer
+    Public BoardData(,) As Integer
+
     Public Structure Scores 'the colour and its corresponding score is stored in a record structure
         Public colour As Color
         Public score As Integer
@@ -24,12 +32,12 @@
         colourList(2) = Color.DeepSkyBlue
         colourList(3) = Color.Gold
 
-        If StartScreen.loadGame = True Then
-            dimensions = StartScreen.loadBoardSize
-            cellSize = StartScreen.loadCellSize
+        If loadGame = True Then
+            dimensions = loadBoardSize
+            cellSize = loadCellSize
             For counter = 0 To 3
-                playerScore(counter).score = StartScreen.loadUserScore(counter)
-                opponentScore(counter).score = StartScreen.loadComputerScore(counter)
+                playerScore(counter).score = loadUserScore(counter)
+                opponentScore(counter).score = loadComputerScore(counter)
             Next
         Else
             dimensions = BoardSize.boardDimensions
@@ -44,10 +52,7 @@
         WindowState = FormWindowState.Maximized 'the window starts up full screen
         For counter = 0 To 5
             playerTiles(counter) = New Tile(Me, New Point(((counter) * cellSize) + ((counter + 1) * 80) + 200, Bottom - 200), cellSize) 'new tiles are created with even spacing
-            MsgBox("Tile " & playerTiles(counter).Location.ToString)
-            'Dim newButton As New RotateButton(Me, New Point(((counter) * cellSize) + ((counter + 1) * 80) + 213, playerTiles(0).Bottom + 20)) 'new rotate buttons are created under these tiles
             Dim newButton As New RotateButton(Me, New Point(playerTiles(counter).Location.X + Int(cellSize / 4), playerTiles(0).Bottom + 20)) 'new rotate buttons are created under these tiles
-            MsgBox("Button " & newButton.Location.ToString)
         Next
 
         playgrid = New PlayGrid(dimensions, Me, cellSize) 'a new playgrid is initialised
@@ -101,10 +106,9 @@
                     scoresArray(i).name = Strings.Right(readarray(i - 1), readarray(i - 1).Length - 3)
                 Next
                 SortHighScores(scoresArray, upperBound)
-                Hide()
                 HighScoreTable.Show()
                 HighScoreTable.populateGrid(scoresArray)
-                'show high score table
+                Close()
             Else
                 'you lose screen
                 'show high score table

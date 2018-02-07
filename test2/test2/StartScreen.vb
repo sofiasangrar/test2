@@ -1,10 +1,5 @@
 ﻿Public Class StartScreen
-    Public loadBoardSize As Integer
-    Public loadCellSize As Integer
-    Public loadComputerScore(3) As Integer
-    Public loadUserScore(3) As Integer
-    Public BoardData(,) As Integer
-    Public loadGame As Boolean = False
+
 
     Private Sub StartScreen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WindowState = FormWindowState.Maximized 'the window starts up full screen
@@ -29,7 +24,6 @@
                 writeFile.Close()
                 BoardSize.Show()
                 BoardSize.BringToFront()
-                Hide()
             End If
         Else
             writeFile = My.Computer.FileSystem.OpenTextFileWriter(filename, False)
@@ -37,7 +31,6 @@
             writeFile.Close()
             BoardSize.Show()
             BoardSize.BringToFront()
-            Hide()
         End If
 
     End Sub
@@ -49,30 +42,37 @@
         Dim writeFile As IO.StreamWriter
         readarray = file.ReadToEnd.Split(vbCr)
         file.Close()
-        loadBoardSize = Convert.ToInt32(readarray(0))
-        loadCellSize = Convert.ToInt32(readarray(1))
+        If readarray(0) <> "" Then
+            PlayScreen.loadBoardSize = Convert.ToInt32(readarray(0))
+            PlayScreen.loadCellSize = Convert.ToInt32(readarray(1))
+            For loopCounter = 0 To 3
+                PlayScreen.loadUserScore(loopCounter) = Convert.ToInt32(readarray(loopCounter + 2))
+                PlayScreen.loadComputerScore(loopCounter) = Convert.ToInt32(readarray(loopCounter + 6))
 
-        For loopCounter = 0 To 3
-            loadUserScore(loopCounter) = Convert.ToInt32(readarray(loopCounter + 2))
-            loadComputerScore(loopCounter) = Convert.ToInt32(readarray(loopCounter + 6))
-        Next
-
-        ReDim BoardData(loadBoardSize, loadBoardSize)
-        Dim counter As Integer = 10
-        Do Until counter = UBound(readarray)
-            For outer = 0 To loadBoardSize
-                For inner = 0 To loadBoardSize
-                    BoardData(outer, inner) = Convert.ToInt32(readarray(counter))
-                    counter = counter + 1
-                Next
             Next
-        Loop
-        writeFile = My.Computer.FileSystem.OpenTextFileWriter(filename, False)
-        writeFile.Write("")
-        writeFile.Close()
-        loadGame = True
-        Hide()
-        PlayScreen.Show()
+            ReDim PlayScreen.BoardData(PlayScreen.loadBoardSize, PlayScreen.loadBoardSize)
+            Dim counter As Integer = 10
+            Do Until counter = UBound(readarray)
+                For outer = 0 To PlayScreen.loadBoardSize
+                    For inner = 0 To PlayScreen.loadBoardSize
+                        PlayScreen.BoardData(outer, inner) = Convert.ToInt32(readarray(counter))
+                        counter = counter + 1
+                    Next
+                Next
+            Loop
+            writeFile = My.Computer.FileSystem.OpenTextFileWriter(filename, False)
+            writeFile.Write("")
+            writeFile.Close()
+            PlayScreen.loadGame = True
+            PlayScreen.Show()
+            Close()
+        Else
+            MsgBox("There is no game saved.")
+        End If
     End Sub
 
+    Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
+        HighScoreTable.Show()
+        Close()
+    End Sub
 End Class

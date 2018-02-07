@@ -1,0 +1,15 @@
+C:\Users\12h169\source\repos\test2\test2\bin\Debug\test2.exe.config
+C:\Users\12h169\source\repos\test2\test2\bin\Debug\test2.exe
+C:\Users\12h169\source\repos\test2\test2\bin\Debug\test2.pdb
+C:\Users\12h169\source\repos\test2\test2\bin\Debug\test2.xml
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\WindowsApp1.Resources.resources
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.vbproj.GenerateResource.Cache
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.vbproj.CoreCompileInputs.cache
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.exe
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.xml
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.pdb
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\test2.vbprojResolveAssemblyReference.cache
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\WindowsApp1.PlayScreen.resources
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\WindowsApp1.StartScreen.resources
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\WindowsApp1.BoardSize.resources
+C:\Users\12h169\source\repos\test2\test2\obj\Debug\WindowsApp1.HighScoreTable.resources

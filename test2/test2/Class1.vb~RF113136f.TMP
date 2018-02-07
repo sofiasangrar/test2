@@ -1,0 +1,86 @@
+﻿Public Class PlayerTile
+    Inherits Tile
+
+    Public orientation As Integer
+    'Public colour1 As Color
+    'Public colour2 As Color
+
+    Public isDragging As Boolean = False
+    Public isClick As Boolean = False
+    Public startpoint As Point
+    Public firstPoint As Point
+    Public lastPoint As Point
+
+    Public Sub New(form As Form1, loc As Point)
+        Dim pictureBox1 As New PictureBox()
+        Dim pictureBox2 As New PictureBox()
+
+        'colour1 = RandomColour()
+        pictureBox1.BackColor = colour1
+        pictureBox1.Size = New Size(50, 50)
+        pictureBox1.Padding = New Padding(0, 0, 0, 0)
+        pictureBox1.BorderStyle = BorderStyle.FixedSingle
+
+        'colour2 = RandomColour()
+        pictureBox2.BackColor = colour2
+        pictureBox2.Size = New Size(50, 50)
+        pictureBox2.Padding = New Padding(0, 0, 0, 0)
+        pictureBox2.BorderStyle = BorderStyle.FixedSingle
+        pictureBox2.Location = New Point(pictureBox1.Left, pictureBox1.Bottom)
+
+        Controls.Add(pictureBox1)
+        Controls.Add(pictureBox2)
+        Location = loc
+        form.Controls.Add(Me)
+
+        orientation = 1
+        Orientate()
+        'starts as one, each clockwise rotation increments by 1
+        'Connect the mouse events of the PictureBoxes to the event handler method.
+        AddHandler pictureBox1.MouseDown, AddressOf tile_MouseDown
+        AddHandler pictureBox1.MouseMove, AddressOf tile_MouseMove
+        AddHandler pictureBox1.MouseUp, AddressOf tile_MouseUp
+        AddHandler pictureBox2.MouseDown, AddressOf tile_MouseDown
+        AddHandler pictureBox2.MouseMove, AddressOf tile_MouseMove
+        AddHandler pictureBox2.MouseUp, AddressOf tile_MouseUp
+    End Sub
+
+    Public Sub Orientate()
+        If (orientation Mod 2) = 0 Then
+            Size = New Size(100, 50)
+        Else
+            Size = New Size(50, 100)
+        End If
+    End Sub
+
+    Public Sub Rotate()
+        orientation = orientation + 1
+        Orientate()
+    End Sub
+
+    Public Sub tile_MouseDown(sender As Object, e As MouseEventArgs)
+        startpoint = PointToScreen(New Point(e.X, e.Y))
+        firstPoint = startpoint
+        isDragging = True
+    End Sub
+
+    Public Sub tile_MouseMove(sender As Object, e As MouseEventArgs)
+        If isDragging Then
+            Dim EndPoint As Point = PointToScreen(New Point(e.X, e.Y))
+            isClick = False
+            Left += (EndPoint.X - startpoint.X)
+            Top += (EndPoint.Y - startpoint.Y)
+            startpoint = EndPoint
+            lastPoint = EndPoint
+        End If
+    End Sub
+
+    Public Sub tile_MouseUp(sender As Object, e As MouseEventArgs)
+        isDragging = False
+        If lastPoint = startpoint Then
+            isClick = True
+        Else
+            isClick = False
+        End If
+    End Sub
+End Class

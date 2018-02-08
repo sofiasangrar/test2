@@ -95,7 +95,8 @@
         Dim cell1Colour As Color = cells(outer1, inner1).cellProperty
         Dim cell2colour As Color = cells(outer2, inner2).cellProperty
         Dim incrementScore As Integer
-
+        Dim outerCounter As Integer
+        Dim innerCounter As Integer
 
         For i = 0 To 3
             If PlayScreen.playerScore(i).colour = cell1Colour Then
@@ -148,7 +149,61 @@
             Next
         End If
 
+        If inner1 > 0 And outer1 > 0 Then
+            outerCounter = outer1 - 1
+            innerCounter = inner1 - 1
+            Do While outerCounter >= 0 And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
 
+        If outer1 < dimensions And inner1 > 0 Then
+            outerCounter = outer1 - 1
+            innerCounter = inner1 + 1
+            Do While outerCounter >= 0 And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer1 < dimensions And inner1 < dimensions Then
+            outerCounter = outer1 + 1
+            innerCounter = inner1 + 1
+            Do While outerCounter <= dimensions And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer1 < dimensions And inner1 > 0 Then
+            outerCounter = outer1 + 1
+            innerCounter = inner1 - 1
+            Do While outerCounter <= dimensions And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
 
         For i = 0 To 3
             If PlayScreen.playerScore(i).colour = cell2colour Then
@@ -198,6 +253,62 @@
                     Exit For
                 End If
             Next
+        End If
+
+        If inner2 > 0 And outer2 > 0 Then
+            outerCounter = outer2 - 1
+            innerCounter = inner2 - 1
+            Do While outerCounter >= 0 And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 > 0 Then
+            outerCounter = outer2 - 1
+            innerCounter = inner2 + 1
+            Do While outerCounter >= 0 And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 < dimensions Then
+            outerCounter = outer2 + 1
+            innerCounter = inner2 + 1
+            Do While outerCounter <= dimensions And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 > 0 Then
+            outerCounter = outer2 + 1
+            innerCounter = inner2 - 1
+            Do While outerCounter <= dimensions And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    PlayScreen.playerScore(incrementScore).score = PlayScreen.playerScore(incrementScore).score + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
         End If
 
         For counter = 0 To 3

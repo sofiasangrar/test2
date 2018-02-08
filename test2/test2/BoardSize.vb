@@ -3,7 +3,7 @@
     Public cellSize As Integer
 
     Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
-        boardDimensions = 6
+        boardDimensions = 4
         cellSize = 50
         PlayScreen.Show()
         Close()

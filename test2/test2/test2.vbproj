@@ -94,12 +94,16 @@
     <Compile Include="BoardSize.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ComputerTile.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="HighScoreTable.Designer.vb">
       <DependentUpon>HighScoreTable.vb</DependentUpon>
     </Compile>
     <Compile Include="HighScoreTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Opponent.vb" />
     <Compile Include="Save.vb" />
     <Compile Include="ScoreTable.vb">
       <SubType>Component</SubType>

@@ -5,7 +5,7 @@
     Public cellSize As Integer
     Public dimensions As Integer
     Public userTurn As Boolean = True
-
+    Public computer As Opponent
 
     Public loadGame As Boolean
     Public loadBoardSize As Integer
@@ -50,6 +50,7 @@
         End If
 
         WindowState = FormWindowState.Maximized 'the window starts up full screen
+        computer = New Opponent
         For counter = 0 To 5
             playerTiles(counter) = New Tile(Me, New Point(((counter) * cellSize) + ((counter + 1) * 80) + 200, Bottom - 200), cellSize) 'new tiles are created with even spacing
             Dim newButton As New RotateButton(Me, New Point(playerTiles(counter).Location.X + Int(cellSize / 4), playerTiles(0).Bottom + 20)) 'new rotate buttons are created under these tiles

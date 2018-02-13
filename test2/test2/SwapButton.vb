@@ -2,7 +2,7 @@
     Inherits Button
 
     Public Sub New()
-        Location = New Point(1200, PlayScreen.Bottom - 160)
+        Location = New Point(PlayScreen.Right - 200, PlayScreen.Bottom - 185)
         Size = New Size(30, 30) 'its size is set
         BackgroundImageLayout = ImageLayout.Stretch
         BackgroundImage = My.Resources.swap
@@ -21,7 +21,8 @@
             tile.pictureBox1.BackColor = RandomColour(PlayScreen.colourList) 'the background colour of each half of the tile is set to a new random colour
             tile.pictureBox2.BackColor = RandomColour(PlayScreen.colourList)
         Next
-        'userTurn = False
+        PlayScreen.userTurn = False
+        PlayScreen.computer.opponentTurn(0)
     End Sub
 
 End Class

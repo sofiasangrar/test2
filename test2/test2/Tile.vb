@@ -130,7 +130,8 @@
             MsgBox("GameOver")
             PlayScreen.FindWinner()
         Else
-            'PlayScreen.userTurn = False
+            PlayScreen.userTurn = False
+            PlayScreen.computer.opponentTurn(0)
         End If
     End Sub
 

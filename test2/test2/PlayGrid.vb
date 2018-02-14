@@ -88,6 +88,8 @@
     Public Sub SetColour(ByVal colour1 As Color, ByVal colour2 As Color, ByVal outer1 As Integer, ByVal inner1 As Integer, ByVal outer2 As Integer, ByVal inner2 As Integer)
         cells(outer1, inner1).cellProperty = colour1
         cells(outer2, inner2).cellProperty = colour2
+        cells(outer1, inner1).onScreen.BackColor = colour1
+        cells(outer2, inner2).onScreen.BackColor = colour2
     End Sub
 
     Public Sub CalculateScore(ByVal outer1, ByVal inner1, ByVal outer2, ByVal inner2)
@@ -351,4 +353,242 @@
         Next
         Return moreMoves
     End Function
+
+    Public Structure computerScores
+        Public score1 As Integer
+        Public colour1 As Color
+        Public score2 As Integer
+        Public colour2 As Color
+        Public outer1 As Integer
+        Public inner1 As Integer
+        Public outer2 As Integer
+        Public inner2 As Integer
+    End Structure
+
+    Public Function CalculateOpponentScore(ByVal outer1 As Integer, ByVal inner1 As Integer, ByVal outer2 As Integer, ByVal inner2 As Integer, ByVal tile As ComputerTile, ByVal orientation As Integer)
+        Dim cell1Colour As Color
+        Dim cell2colour As Color
+        If orientation Mod 2 = 0 Then
+            cell1Colour = tile.leftBox.BackColor
+            cell2colour = tile.rightBox.BackColor
+        Else
+            cell1Colour = tile.topBox.BackColor
+            cell2colour = tile.bottomBox.BackColor
+        End If
+
+        Dim outerCounter As Integer
+        Dim innerCounter As Integer
+        Dim score As computerScores
+        score.colour1 = cell1Colour
+        score.colour2 = cell2colour
+
+
+        If inner1 > 0 Then
+            For counter = inner1 - 1 To 0 Step -1
+                If cells(outer1, counter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If outer1 < dimensions Then
+            For counter = outer1 + 1 To dimensions
+                If counter = outer2 And inner1 = inner2 Then
+                    Exit For
+                ElseIf cells(counter, inner1).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If inner1 < dimensions Then
+            For counter = inner1 + 1 To dimensions
+                If counter = inner2 And outer1 = outer2 Then
+                    Exit For
+                ElseIf cells(outer1, counter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+
+        If outer1 > 0 Then
+            For counter = outer1 - 1 To 0 Step -1
+                If cells(counter, inner1).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If inner1 > 0 And outer1 > 0 Then
+            outerCounter = outer1 - 1
+            innerCounter = inner1 - 1
+            Do While outerCounter >= 0 And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer1 < dimensions And inner1 > 0 Then
+            outerCounter = outer1 - 1
+            innerCounter = inner1 + 1
+            Do While outerCounter >= 0 And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer1 < dimensions And inner1 < dimensions Then
+            outerCounter = outer1 + 1
+            innerCounter = inner1 + 1
+            Do While outerCounter <= dimensions And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer1 < dimensions And inner1 > 0 Then
+            outerCounter = outer1 + 1
+            innerCounter = inner1 - 1
+            Do While outerCounter <= dimensions And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell1Colour Then
+                    score.score1 = score.score1 + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If inner2 > 0 Then
+            For counter = inner2 - 1 To 0 Step -1
+                If counter = inner1 And outer1 = outer2 Then
+                    Exit For
+                ElseIf cells(outer2, counter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If outer2 < dimensions Then
+            For counter = outer2 + 1 To dimensions
+                If cells(counter, inner2).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If inner2 < dimensions Then
+            For counter = inner2 + 1 To dimensions
+                If cells(outer2, counter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If outer2 > 0 Then
+            For counter = outer2 - 1 To 0 Step -1
+                If counter = outer1 And inner1 = inner2 Then
+                    Exit For
+                ElseIf cells(counter, inner2).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        If inner2 > 0 And outer2 > 0 Then
+            outerCounter = outer2 - 1
+            innerCounter = inner2 - 1
+            Do While outerCounter >= 0 And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 > 0 Then
+            outerCounter = outer2 - 1
+            innerCounter = inner2 + 1
+            Do While outerCounter >= 0 And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                    outerCounter = outerCounter - 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 < dimensions Then
+            outerCounter = outer2 + 1
+            innerCounter = inner2 + 1
+            Do While outerCounter <= dimensions And innerCounter <= dimensions
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter + 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        If outer2 < dimensions And inner2 > 0 Then
+            outerCounter = outer2 + 1
+            innerCounter = inner2 - 1
+            Do While outerCounter <= dimensions And innerCounter >= 0
+                If cells(outerCounter, innerCounter).cellProperty = cell2colour Then
+                    score.score2 = score.score2 + 1
+                    outerCounter = outerCounter + 1
+                    innerCounter = innerCounter - 1
+                Else
+                    Exit Do
+                End If
+            Loop
+        End If
+
+        score.outer1 = outer1
+        score.inner1 = inner1
+        score.outer2 = outer2
+        score.inner2 = inner2
+        Return score
+    End Function
+
 End Class

@@ -64,7 +64,12 @@
             For counter = 0 To 3
                 PlayScreen.computerScoreBoard.scoreDisplay(counter).scoreBox.Text = PlayScreen.opponentScore(counter).score
             Next
-            PlayScreen.userTurn = True
+            If PlayScreen.playgrid.CheckForMoves = True Then
+                PlayScreen.userTurn = True
+            Else
+                MsgBox("Game over")
+                PlayScreen.FindWinner()
+            End If
         End If
     End Sub
 

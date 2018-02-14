@@ -110,10 +110,11 @@
                 HighScoreTable.Show()
                 HighScoreTable.populateGrid(scoresArray)
                 Close()
-            Else
-                'you lose screen
-                'show high score table
             End If
+        Else
+            MsgBox("You lose")
+            HighScoreTable.Show()
+            Close()
         End If
     End Sub
 

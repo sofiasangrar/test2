@@ -61,6 +61,9 @@
             PlayScreen.playgrid.SetColour(move.colour1, move.colour2, move.outer1, move.inner1, move.outer2, move.inner2)
             PlayScreen.opponentScore(Array.IndexOf(PlayScreen.colourList, move.colour1)).score = PlayScreen.opponentScore(Array.IndexOf(PlayScreen.colourList, move.colour1)).score + move.score1
             PlayScreen.opponentScore(Array.IndexOf(PlayScreen.colourList, move.colour2)).score = PlayScreen.opponentScore(Array.IndexOf(PlayScreen.colourList, move.colour2)).score + move.score2
+            For counter = 0 To 3
+                PlayScreen.computerScoreBoard.scoreDisplay(counter).scoreBox.Text = PlayScreen.opponentScore(counter).score
+            Next
             PlayScreen.userTurn = True
         End If
     End Sub

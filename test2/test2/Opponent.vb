@@ -33,7 +33,7 @@
         Dim useColour As Color = GetLowestScore(loc)
         Dim found As Boolean = False
         Dim useTilePos As Integer
-        Dim useTile As ComputerTile
+        Dim useTile As New ComputerTile
         Dim counter As Integer = 0
         Dim horizontalGaps(0) As TileVacancy
         Dim verticalGaps(0) As TileVacancy
@@ -64,10 +64,11 @@
             For counter = 0 To 3
                 PlayScreen.computerScoreBoard.scoreDisplay(counter).scoreBox.Text = PlayScreen.opponentScore(counter).score
             Next
+            Dim replaceIndex As Integer = Array.IndexOf(computerTiles, useTile)
+            computerTiles(replaceIndex) = New ComputerTile()
             If PlayScreen.playgrid.CheckForMoves = True Then
                 PlayScreen.userTurn = True
             Else
-                MsgBox("Game over")
                 PlayScreen.FindWinner()
             End If
         End If

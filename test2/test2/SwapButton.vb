@@ -2,8 +2,8 @@
     Inherits Button
 
     Public Sub New()
-        Location = New Point(PlayScreen.Right - 200, PlayScreen.Bottom - 185)
-        Size = New Size(30, 30) 'its size is set
+        Location = New Point(PlayScreen.playerTiles(5).Right + PlayScreen.cellSize * 1.5, PlayScreen.Bottom - 185)
+        Size = New Size(40, 40) 'its size is set
         BackgroundImageLayout = ImageLayout.Stretch
         BackgroundImage = My.Resources.swap
         BringToFront()

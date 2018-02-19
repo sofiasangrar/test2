@@ -11,7 +11,7 @@
     Public Sub New(form As Control, loc As Point, player() As PlayScreen.Scores)
         Location = loc
         Size = New Size(1600, 80)
-
+        BackColor = Color.Transparent
         For counter = 0 To 3
             scoreDisplay(counter).colourBox = New PictureBox
             scoreDisplay(counter).colourBox.Left = counter * 40

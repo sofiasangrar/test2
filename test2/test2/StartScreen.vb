@@ -72,7 +72,25 @@
     End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
-        HighScoreTable.Show()
-        Close()
+        NewBackButton(HighScoreTable)
+    End Sub
+
+    Private Sub btnInstructions_Click(sender As Object, e As EventArgs) Handles btnInstructions.Click
+        NewBackButton(Instructions)
+    End Sub
+
+    Private Sub NewBackButton(form As Form)
+        Dim goBack As New Button
+        goBack.Size = New Size(50, 50)
+        goBack.Location = New Point(100, 12)
+        goBack.BackgroundImage = My.Resources.back
+        goBack.BackgroundImageLayout = ImageLayout.Stretch
+        form.Controls.Add(goBack)
+        AddHandler goBack.Click, AddressOf Back_Click
+        form.Show()
+    End Sub
+
+    Public Sub Back_Click(sender As Object, e As EventArgs)
+        ActiveForm.Close()
     End Sub
 End Class

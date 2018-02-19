@@ -13,12 +13,13 @@ Public Module Utilities
         Dim dx As Single = (tile.Location.X - firstpoint.X) / 100 'this is a hundredth of the distance between the tile's original x-position and its final x-position
         Dim dy As Single = (tile.Location.Y - firstpoint.Y) / 100 'this is a hundredth of the distance between the tile's original y-position and its final y-position
 
-        For i = 100 To 0 Step -1
+        For i = 100 To 0 Step -0.5
             tile.Location = New Point((i * dx + firstpoint.X), (i * dy + firstpoint.Y)) 'the tile's location is moved, 1/100th at a time, back to its original position
-            Threading.Thread.Sleep(0.7) 'there is a pause between each movement so that it seems as though it is flowing
+            Threading.Thread.Sleep(0.2) 'there is a pause between each movement so that it seems as though it is flowing
         Next
 
         tile.Location = firstpoint 'finally the tile's location is set to its original location
+
     End Sub
 
 End Module

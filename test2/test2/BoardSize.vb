@@ -8,6 +8,7 @@
         PlayScreen.Show()
         Close()
         StartScreen.Close()
+        HighScoreTable.Close()
     End Sub
 
     Private Sub btn10_Click(sender As Object, e As EventArgs) Handles btn10.Click
@@ -16,6 +17,7 @@
         PlayScreen.Show()
         Close()
         StartScreen.Close()
+        HighScoreTable.Close()
     End Sub
 
     Private Sub btn15_Click(sender As Object, e As EventArgs) Handles btn15.Click
@@ -24,6 +26,10 @@
         PlayScreen.Show()
         Close()
         StartScreen.Close()
+        HighScoreTable.Close()
     End Sub
 
+    Private Sub BoardSize_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

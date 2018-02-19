@@ -25,6 +25,13 @@
     Public computerScoreBoard As ScoreTable
     Public playerTiles(5) As Tile
 
+    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+        Dim response As MsgBoxResult = MsgBox("Are you sure you want to quit without saving?", MsgBoxStyle.YesNo, "Alert")
+        If response = MsgBoxResult.Yes Then
+            End
+        End If
+    End Sub
+
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'a standardised list of colours is created for ease of changing them if necessary
         colourList(0) = Color.Red
@@ -73,6 +80,7 @@
     End Sub
 
     Public Sub FindWinner()
+        PlayAgainButton()
         Dim lowestPlayerScore As Integer = playerScore(0).score
         Dim lowestComputerScore As Integer = opponentScore(0).score
         For counter = 0 To 3
@@ -85,7 +93,12 @@
         Next
 
         If lowestPlayerScore > lowestComputerScore Then
-            Dim name As String = InputBox("You win! Enter name")
+            GameOver.lblWinOrLose.Text = "You win"
+            GameOver.Show()
+            GameOver.BringToFront()
+            Threading.Thread.Sleep(3000)
+            GameOver.Close()
+            Dim name As String = InputBox("Enter name")
             Dim readarray() As String
             Dim filename As String = "C:\Users\12h169\source\repos\test2\highScore.txt"
             Dim file As New IO.StreamReader(filename)
@@ -112,10 +125,26 @@
                 Close()
             End If
         Else
-            MsgBox("You lose")
+            GameOver.lblWinOrLose.Text = "You lose"
+            GameOver.Show()
+            GameOver.BringToFront()
+            Threading.Thread.Sleep(3000)
+            GameOver.Close()
             HighScoreTable.Show()
             Close()
         End If
+    End Sub
+
+    Private Sub PlayAgainButton()
+        Dim playAgain As New Button
+
+        playAgain.Location = New Point(100, 12)
+        playAgain.Size = New Size(200, 70)
+        playAgain.BackColor = Color.Orange
+        playAgain.Text = "PLAY AGAIN"
+        playAgain.Font = New Font("Consolas", 17, FontStyle.Bold)
+        HighScoreTable.Controls.Add(playAgain)
+        AddHandler playAgain.Click, AddressOf HighScoreTable.PlayAgain_Click
     End Sub
 
     Public Structure highScore

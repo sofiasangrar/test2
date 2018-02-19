@@ -127,7 +127,6 @@
         RemoveHandler pictureBox2.MouseUp, AddressOf tile_MouseUp
         PlayScreen.playgrid.CalculateScore(outer1, inner1, outer2, inner2)
         If PlayScreen.playgrid.CheckForMoves() = False Then
-            MsgBox("GameOver")
             PlayScreen.FindWinner()
         Else
             PlayScreen.userTurn = False

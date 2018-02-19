@@ -22,6 +22,7 @@ Partial Class StartScreen
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(StartScreen))
         Me.lblGenius = New System.Windows.Forms.Label()
         Me.btnInstructions = New System.Windows.Forms.Button()
         Me.btnLoad = New System.Windows.Forms.Button()
@@ -36,9 +37,10 @@ Partial Class StartScreen
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblGenius.AutoSize = True
+        Me.lblGenius.BackColor = System.Drawing.Color.Transparent
         Me.lblGenius.Font = New System.Drawing.Font("Courier New", 100.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGenius.ForeColor = System.Drawing.Color.Orange
-        Me.lblGenius.Location = New System.Drawing.Point(336, 236)
+        Me.lblGenius.ForeColor = System.Drawing.Color.Chocolate
+        Me.lblGenius.Location = New System.Drawing.Point(372, 238)
         Me.lblGenius.Name = "lblGenius"
         Me.lblGenius.Size = New System.Drawing.Size(544, 151)
         Me.lblGenius.TabIndex = 0
@@ -61,7 +63,7 @@ Partial Class StartScreen
         Me.btnLoad.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.btnLoad.Font = New System.Drawing.Font("Consolas", 27.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoad.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.btnLoad.Location = New System.Drawing.Point(867, 464)
+        Me.btnLoad.Location = New System.Drawing.Point(914, 464)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(243, 74)
         Me.btnLoad.TabIndex = 2
@@ -71,11 +73,11 @@ Partial Class StartScreen
         'btnHighScore
         '
         Me.btnHighScore.BackColor = System.Drawing.Color.LimeGreen
-        Me.btnHighScore.Font = New System.Drawing.Font("Consolas", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHighScore.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHighScore.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.btnHighScore.Location = New System.Drawing.Point(513, 638)
+        Me.btnHighScore.Location = New System.Drawing.Point(514, 639)
         Me.btnHighScore.Name = "btnHighScore"
-        Me.btnHighScore.Size = New System.Drawing.Size(213, 39)
+        Me.btnHighScore.Size = New System.Drawing.Size(260, 67)
         Me.btnHighScore.TabIndex = 3
         Me.btnHighScore.Text = "HIGH SCORE TABLE"
         Me.btnHighScore.UseVisualStyleBackColor = False
@@ -85,7 +87,7 @@ Partial Class StartScreen
         Me.btnNewGame.BackColor = System.Drawing.Color.Gold
         Me.btnNewGame.Font = New System.Drawing.Font("Consolas", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewGame.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.btnNewGame.Location = New System.Drawing.Point(513, 450)
+        Me.btnNewGame.Location = New System.Drawing.Point(538, 450)
         Me.btnNewGame.Name = "btnNewGame"
         Me.btnNewGame.Size = New System.Drawing.Size(213, 99)
         Me.btnNewGame.TabIndex = 4
@@ -94,7 +96,7 @@ Partial Class StartScreen
         '
         'btnQuit
         '
-        Me.btnQuit.BackColor = System.Drawing.Color.Wheat
+        Me.btnQuit.BackColor = System.Drawing.Color.Transparent
         Me.btnQuit.BackgroundImage = Global.WindowsApp1.My.Resources.Resources.cross
         Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnQuit.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -109,6 +111,8 @@ Partial Class StartScreen
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Cornsilk
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1122, 718)
         Me.Controls.Add(Me.btnQuit)
         Me.Controls.Add(Me.btnNewGame)
@@ -116,6 +120,7 @@ Partial Class StartScreen
         Me.Controls.Add(Me.btnLoad)
         Me.Controls.Add(Me.btnInstructions)
         Me.Controls.Add(Me.lblGenius)
+        Me.DoubleBuffered = True
         Me.Name = "StartScreen"
         Me.Text = "StartScreen"
         Me.ResumeLayout(False)

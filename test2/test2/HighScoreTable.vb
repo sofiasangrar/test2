@@ -13,6 +13,10 @@
         Next
     End Sub
 
+    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+        End
+    End Sub
+
     Private Sub HighScoreTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WindowState = FormWindowState.Maximized
         Dim readarray() As String
@@ -32,4 +36,11 @@
         Next
         populateGrid(scoresArray)
     End Sub
+
+    Public Sub PlayAgain_Click(sender As Object, e As EventArgs)
+        BoardSize.Show()
+        BoardSize.BringToFront()
+    End Sub
+
+
 End Class

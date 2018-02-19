@@ -22,7 +22,20 @@ Partial Class PlayScreen
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.btnQuit = New System.Windows.Forms.Button()
         Me.SuspendLayout()
+        '
+        'btnQuit
+        '
+        Me.btnQuit.BackColor = System.Drawing.Color.Transparent
+        Me.btnQuit.BackgroundImage = Global.WindowsApp1.My.Resources.Resources.cross
+        Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnQuit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnQuit.Location = New System.Drawing.Point(12, 12)
+        Me.btnQuit.Name = "btnQuit"
+        Me.btnQuit.Size = New System.Drawing.Size(79, 77)
+        Me.btnQuit.TabIndex = 6
+        Me.btnQuit.UseVisualStyleBackColor = False
         '
         'PlayScreen
         '
@@ -30,10 +43,16 @@ Partial Class PlayScreen
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Cornsilk
+        Me.BackgroundImage = Global.WindowsApp1.My.Resources.Resources.background
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(619, 430)
+        Me.Controls.Add(Me.btnQuit)
+        Me.DoubleBuffered = True
         Me.Name = "PlayScreen"
         Me.Text = "PlayScreen"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents btnQuit As Button
 End Class

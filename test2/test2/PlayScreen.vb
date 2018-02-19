@@ -83,55 +83,53 @@
         PlayAgainButton()
         Dim lowestPlayerScore As Integer = playerScore(0).score
         Dim lowestComputerScore As Integer = opponentScore(0).score
-        For counter = 0 To 3
+        For counter = 1 To 3
             If playerScore(counter).score < lowestPlayerScore Then
                 lowestPlayerScore = playerScore(counter).score
             End If
             If opponentScore(counter).score < lowestComputerScore Then
-                lowestPlayerScore = playerScore(counter).score
+                lowestComputerScore = opponentScore(counter).score
             End If
         Next
 
         If lowestPlayerScore > lowestComputerScore Then
             GameOver.lblWinOrLose.Text = "You win"
-            GameOver.Show()
-            GameOver.BringToFront()
-            Threading.Thread.Sleep(3000)
-            GameOver.Close()
-            Dim name As String = InputBox("Enter name")
+            Dim name As String
+            Do
+                name = InputBox("Enter name (1-10 characters)")
+                If name.Length > 10 Then
+                    MsgBox("Name cannot exceed 10 characters")
+                ElseIf name.Length < 1 Then
+                    MsgBox("Please enter a name")
+                End If
+            Loop Until name.Length > 0 AndAlso name.Length <= 10
             Dim readarray() As String
-            Dim filename As String = "C:\Users\12h169\source\repos\test2\highScore.txt"
-            Dim file As New IO.StreamReader(filename)
-            Dim upperBound As Integer
+                Dim filename As String = "C:\Users\12h169\source\repos\test2\highScore.txt"
+                Dim file As New IO.StreamReader(filename)
+                Dim upperBound As Integer
 
-            Dim scoresArray() As highScore
+                Dim scoresArray() As highScore
 
-            readarray = file.ReadToEnd.Split(",")
-            file.Close()
-            upperBound = UBound(readarray)
-            ReDim scoresArray(upperBound)
-            scoresArray(0).score = lowestPlayerScore
-            scoresArray(0).name = name
+                readarray = file.ReadToEnd.Split(",")
+                file.Close()
+                upperBound = UBound(readarray)
+                ReDim scoresArray(upperBound)
+                scoresArray(0).score = lowestPlayerScore
+                scoresArray(0).name = name
 
 
-            If upperBound > 0 Then
-                For i = 1 To upperBound
-                    scoresArray(i).score = Val(Strings.Left(readarray(i - 1), 3))
-                    scoresArray(i).name = Strings.Right(readarray(i - 1), readarray(i - 1).Length - 3)
-                Next
-                SortHighScores(scoresArray, upperBound)
-                HighScoreTable.Show()
-                HighScoreTable.populateGrid(scoresArray)
-                Close()
-            End If
-        Else
-            GameOver.lblWinOrLose.Text = "You lose"
+                If upperBound > 0 Then
+                    For i = 1 To upperBound
+                        scoresArray(i).score = Val(Strings.Left(readarray(i - 1), 3))
+                        scoresArray(i).name = Strings.Right(readarray(i - 1), readarray(i - 1).Length - 3)
+                    Next
+                    SortHighScores(scoresArray, upperBound)
+                    HighScoreTable.populateGrid(scoresArray)
+                End If
+                GameOver.Show()
+            Else
+                GameOver.lblWinOrLose.Text = "You lose"
             GameOver.Show()
-            GameOver.BringToFront()
-            Threading.Thread.Sleep(3000)
-            GameOver.Close()
-            HighScoreTable.Show()
-            Close()
         End If
     End Sub
 
